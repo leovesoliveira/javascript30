@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>Relógio</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+
+  <style>
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+    html, body {
+      box-sizing: border-box;
+      font-family: sans-serif;
+      font-size: 1em;
+      height: 100%;
+      min-height: 100%;
+      text-align: center;
+    }
+    .all {
+      align-items: center;
+      animation: color-fade 10s infinite;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      padding: 50px;
+    }
+    .clock {
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: auto;
+      max-width: 400px;
+      position: relative;
+      width: 100%;
+    }
+    .clock:after {
+      content: '';
+      background-color: #080808;
+      border-radius: 9999px;
+      height: 6px;
+      margin: -3px -3 px 0 0;
+      position: absolute;
+      right: 50%;
+      top: 50%;
+      width: 6px;
+    }
+    .clock-image {
+      width: 100%;
+    }
+    .arrow {
+      background-color: #080808;
+      border-radius: 9999px;
+      height: 3px;
+      position: absolute;
+      transform: rotate(90deg);
+      transform-origin: 100%;
+      top: 50%;
+      right: 50%;
+      width: 32%;
+    }
+    .hour-arrow {
+      width: 20%;
+    }
+    .second-arrow {
+      height: 2px;
+      background-color: #d10a0a;
+    }
+
+    @keyframes color-fade {
+      0% { background: #ff9c9c; }
+      25% { background: #a79cff; }
+      50% { background: #9cffb6; }
+      75% { background: #f0ff9c; }
+      100% { background: #ff9c9c; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="all">
+    <div class="clock">
+      <img class="clock-image" src="assets/images/clock.png" alt="Clock">
+      <div class="arrow hour-arrow"></div>
+      <div class="arrow min-arrow"></div>
+      <div class="arrow second-arrow"></div>
+      <div id="color-background"></div>
+    </div>
+  </div>
+
+  <script>
+    const hourArrow = document.querySelector('.hour-arrow');
+    const minArrow = document.querySelector('.min-arrow');
+    const secondArrow = document.querySelector('.second-arrow');
+
+    function setDate() {
+      const now = new Date();
+      const hours = now.getHours();
+      const mins = now.getMinutes();
+      const seconds = now.getSeconds();
+
+      degrees(hourArrow, hours, 12);
+      degrees(minArrow, mins, 60);
+      degrees(secondArrow, seconds, 60);
+    }
+
+    function degrees (el, type, value) {
+      el.style.transform = `rotate(${((type / value) * 360) + 90}deg)`;
+    }
+
+    setInterval(setDate, 1000);
+  </script>
+</body>
+</html>
