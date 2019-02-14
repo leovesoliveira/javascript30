@@ -18,15 +18,23 @@ html, body {
   height: 100%;
   justify-content: center;
 }
+@media (max-width: 767.98px) {
+  .storm-spirit {
+    flex-direction: column;
+  }
+}
 
 .skill {
   align-items: center;
+  background: transparent;
   border: 0.25rem solid transparent;
   border-radius: 0.5rem;
   display: flex;
   margin: 1rem;
+  padding: 0;
+  outline: none;
   overflow: hidden;
-  transition: all 200ms ease-in-out;
+  transition: all 150ms ease-in-out;
 }
 .skill.playing {
   border-color: #50ff34;
